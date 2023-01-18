@@ -83,23 +83,23 @@ jobs:
       - destroy_environment
 
 
-  # # Exercise: Config and Deployment
-  # configure_infrastructure: 
-  #   docker:
-  #     - image: python:3.7-alpine3.11
-  #   steps:
-  #     - checkout
-  #     - add_ssh_keys:
-  #         fingerprints: ["58:f5:ab:8b:78:05:b6:fc:88:88:e5:2b:c8:3b:4f:c9 "] # You can get this ID in the section where you registered the SSH Key
-  #     - run:
-  #         name: Install dependencies
-  #         command: |
-  #           # install the dependencies needed for your playbook
-  #           apk add --update ansible 
-  #     - run:
-  #         name: Configure server
-  #         command: |
-  #           ansible-playbook -i inventory.txt main4.yml
+  # Exercise: Config and Deployment
+  configure_infrastructure: 
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["e5:5f:a6:2d:8f:48:99:86:0f:39:4f:79:43:45:a7:a8"] # You can get this ID in the section where you registered the SSH Key
+      - run:
+          name: Install dependencies
+          command: |
+            # install the dependencies needed for your playbook
+            apk add --update ansible 
+      - run:
+          name: Configure server
+          command: |
+            ansible-playbook -i inventory.txt main4.yml
 
   # # Exercise: Smoke Testing
   # smoke_test:
@@ -221,7 +221,7 @@ workflows:
       #     requires:
       #       - upload_file
       - create_infrastructure
-      # - configure_infrastructure
+      - configure_infrastructure
       # - create_and_deploy_front_end
       # - promote_to_production:
       #     requires: 
